@@ -7,9 +7,11 @@
 [Cursor package](cursor/README.md) · [Codex package](codex/README.md) · [Acahti](https://github.com/lpythu/acahti) · [Workspace distribution](docs/workspace-distribution.md)
 
 Two small, host-specific packages connect Cursor and Codex to Acahti's Git,
-pull requests, pipelines, commit checks and package workflow. Product operations
-come from your instance's MCP server. The plugin supplies connection guidance and
-rules; it is not a separate Git host or an agent runtime.
+pull requests, pipelines, commit checks, packages, and optional product modules
+(Work / Argos / Chat when `ACAHTI_MODULES` is set on the instance). Product
+operations come from your instance's MCP server and live `skill.md`. The plugin
+supplies connection guidance and rules; it is not a separate Git host or an
+agent runtime.
 
 ```mermaid
 flowchart LR
@@ -18,6 +20,7 @@ flowchart LR
   Acahti --> Git[Repositories and PRs]
   Acahti --> CI[Checks and pipeline logs]
   Acahti --> Packages[Language packages]
+  Acahti --> Modules[Optional Work Argos Chat]
 ```
 
 ## Install
@@ -34,13 +37,18 @@ endpoint without bundling members' credentials.
 ## Verify
 
 Ask your agent to check the Acahti connection through MCP, call `whoami`, confirm
-the intended account and instance, and fetch `inbox`. Opening the website or
-completing a browser redirect alone does not verify MCP tool availability.
+the intended account and instance, read `whoami.modules`, and fetch `inbox`.
+Opening the website or completing a browser redirect alone does not verify MCP
+tool availability.
 
 For commits and pushes **targeting Acahti**, the rules verify the member's Git
 identity. Other Git destinations keep their existing identity and workflow.
 Reminder hooks do not enforce a Git-level block and do not change Git configuration.
 Never paste tokens or passwords into an agent conversation.
+
+When `modules.work` / `argos` / `chat` are true, agents may use the instance SPA
+(`$ROOT_URL/work`, `/argos`, `/chat`) for those surfaces. Git / PR / CI stay
+MCP-first. Do not send operators to Benchyard or a standalone Argos dash host.
 
 ## Develop
 
@@ -50,9 +58,9 @@ python3 -m unittest discover -s tests -v
 ```
 
 Keep the Cursor rules and Codex skill aligned. Instance behavior is discovered
-through `whoami.skill_url`; do not bake a customer's credentials or endpoint into
-the generic packages. Organization-specific release configuration belongs in the
-[distribution guide](docs/workspace-distribution.md).
+through `whoami.skill_url` and `whoami.modules`; do not bake a customer's
+credentials or endpoint into the generic packages. Organization-specific release
+configuration belongs in the [distribution guide](docs/workspace-distribution.md).
 
 Apache-2.0. See [LICENSE](LICENSE). Use the repository's private vulnerability
 reporting for security issues.

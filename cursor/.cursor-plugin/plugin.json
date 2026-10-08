@@ -1,15 +1,15 @@
 {
   "name": "acahti",
   "displayName": "Acahti",
-  "version": "1.5.0",
-  "description": "Island git, PRs, pipelines, secrets, commit author gates, and checks.",
+  "version": "1.7.0",
+  "description": "Island git, PRs, pipelines, secrets, commit checks, and optional Work/Argos/Chat modules.",
   "author": {
     "name": "SAIDC"
   },
   "homepage": "https://github.com/lpythu/acahti",
   "repository": "https://github.com/lpythu/acahti-plugin",
   "logo": "assets/logo.svg",
-  "keywords": ["acahti", "git", "mcp", "ci"],
+  "keywords": ["acahti", "git", "mcp", "ci", "work", "argos", "chat"],
   "category": "integrations",
   "mcpServers": "./mcp.json",
   "variables": {

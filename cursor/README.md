@@ -1,8 +1,8 @@
 # Acahti (Cursor)
 
-Cursor plugin for a self-hosted [Acahti](https://github.com/lpythu/acahti) instance: git, PRs, pipelines, secrets, and commit checks.
+Cursor plugin for a self-hosted [Acahti](https://github.com/lpythu/acahti) instance: git, PRs, pipelines, secrets, commit checks, and optional Work / Argos / Chat modules (`whoami.modules`).
 
-Set **ACAHTI_URL** in Customize → Acahti → Configure (no trailing slash). MCP is `${ACAHTI_URL}/mcp` (OAuth). Then `whoami` and follow `whoami.skill_url`.
+Set **ACAHTI_URL** in Customize → Acahti → Configure (no trailing slash). MCP is `${ACAHTI_URL}/mcp` (OAuth). Then `whoami`, read `modules`, and follow `whoami.skill_url`.
 
 ## Rules
 
@@ -11,7 +11,8 @@ Set **ACAHTI_URL** in Customize → Acahti → Configure (no trailing slash). MC
 | `rules/git-author.mdc` | Commits and pushes targeting Acahti only; verify the actual destination |
 | `rules/island-git.mdc` | Clone / dual remote / push to the island |
 | `rules/island-ci.mdc` | Protected branches, PRs, post-push checks, git tag `vX.Y.Z` vs image tags without `v` |
-| `rules/skill-source.mdc` | Any Acahti MCP / skill work |
+| `rules/island-modules.mdc` | Work / Argos / Chat when `whoami.modules` flags are on |
+| `rules/skill-source.mdc` | Any Acahti MCP / skill / modules work |
 
 Non-Acahti remotes (GitHub, Codeup, …) are out of scope for author and CI rules.
 

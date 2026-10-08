@@ -5,10 +5,10 @@
 Generate each workspace release from the current Codex source instead of editing an older ZIP:
 
 ```sh
-python3 scripts/package_workspace.py --instance https://your-instance.example --workspace SAIDC --output /path/to/acahti-saidc-1.6.0.zip
+python3 scripts/package_workspace.py --instance https://your-instance.example --workspace SAIDC --output /path/to/acahti-saidc-1.7.0.zip
 ```
 
-The instance URL is a release argument, not part of the generic plugin source. The generated package includes the MCP endpoint, current skills, reminder hooks and a release manifest with file hashes. Tests, bytecode and local credentials are excluded. Upload the versioned ZIP and verify the directory version, then test MCP `whoami` and `inbox` from a fresh member task. Hooks must be reviewed/trusted separately after changes; their trust is not shared by the workspace.
+The instance URL is a release argument, not part of the generic plugin source. The generated package includes the MCP endpoint, current skills, reminder hooks and a release manifest with file hashes. Tests, bytecode and local credentials are excluded. Upload the versioned ZIP and verify the directory version, then test MCP `whoami` (including `modules`) and `inbox` from a fresh member task. If the instance sets `ACAHTI_MODULES=work,argos,chat`, also confirm the Work / Argos / Chat SPA tabs. Hooks must be reviewed/trusted separately after changes; their trust is not shared by the workspace.
 
 ## Automatic SAIDC workspace publishing
 

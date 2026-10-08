@@ -1,15 +1,15 @@
 # Acahti for Codex
 
-Use MCP first for identity, repositories, PRs and CI. The generic package supports any Acahti instance; workspace release archives bundle the chosen endpoint.
+Use MCP first for identity, repositories, PRs and CI. Read `whoami.modules` for optional Work / Argos / Chat. The generic package supports any Acahti instance; workspace release archives bundle the chosen endpoint.
 
 ## First connection
 
 1. Install the plugin. For a workspace package, open its MCP connection settings (gear) and complete Authenticate/OAuth with your own account.
 2. For the generic package only, configure your instance through native MCP settings or `codex mcp add <name> --url <endpoint>`, then `codex mcp login <name>` when authentication is required. Reuse existing connections.
-3. Return to a local Codex task; start a new task if tools have not refreshed. Ask: **通过 MCP 检查我的 Acahti 身份和待处理事项**.
+3. Return to a local Codex task; start a new task if tools have not refreshed. Ask: **通过 MCP 检查我的 Acahti 身份、modules 和待处理事项**.
 4. Success requires MCP `whoami` for the intended account and a successful `inbox` call. Logging into the website is a separate operation.
 
-Missing tools: inspect connection status first. Authenticate for missing/expired authorization; diagnose transport errors without repeated login attempts. Do not silently substitute a browser or REST for MCP. Never paste passwords or tokens into a task.
+Missing tools: inspect connection status first. Authenticate for missing/expired authorization; diagnose transport errors without repeated login attempts. Do not silently substitute a browser or REST for MCP **except** enabled module SPAs (`/work`, `/argos`, `/chat` and matching `/ui/*`). Never paste passwords or tokens into a task.
 
 ## Git author
 

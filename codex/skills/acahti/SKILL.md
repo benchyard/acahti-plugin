@@ -2,6 +2,7 @@
 name: acahti
 description: >-
   Use MCP first for Acahti identity, repositories, PRs, pipelines and CI.
+  Optional Work/Argos/Chat when whoami.modules flags are on.
   For commits and pushes targeting Acahti, use whoami and setup_local; leave other targets alone.
   Also use for Acahti connection setup and missing MCP tools.
 ---
@@ -10,11 +11,27 @@ description: >-
 
 ## MCP first
 
-Use the selected instance's MCP tools for identity, repository queries, PRs, pipelines and CI. Discover the tools available in this session, call `whoami`, then use the relevant tool (for example `repo_list` or `inbox`). A loaded skill is not proof that the MCP connection is ready.
+Use the selected instance's MCP tools for identity, repository queries, PRs, pipelines and CI. Discover the tools available in this session, call `whoami`, read `whoami.modules`, then use the relevant tool (for example `repo_list` or `inbox`). A loaded skill is not proof that the MCP connection is ready.
 
-Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. Browser use is appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
+Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. **Exception:** when `whoami.modules` enables `work`, `argos`, or `chat`, browser or session cookie use of `$ROOT_URL/work`, `/argos`, `/chat` and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed for those surfaces only. Git / PR / CI / secrets stay MCP-first. Browser use is also appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
 
 After `whoami` succeeds, fetch its `skill_url` for current instance-specific workflows. Fetching this public instruction document is permitted; it is not a substitute for MCP business tools. Check that the URL belongs to the intended instance. If it cannot be retrieved, explain the failure before making changes that depend on those instructions. Keep MCP-first routing, identity verification and repository scoping in force.
+
+## Optional modules
+
+Read `whoami.modules` (`work` / `argos` / `chat`). Same flags on `GET /ui/public`. Default all off — do not invent missing tabs.
+
+| Flag | SPA | Notes |
+|---|---|---|
+| `work` | `$ROOT_URL/work` | Tickets · Todos · Docs (human collaboration; no bygent) |
+| `argos` | `$ROOT_URL/argos` | Run browser; ingest `POST $ROOT_URL/api/runs` with `ARGOS_TOKEN`; deep link `/argos/runs/{sid}` |
+| `chat` | `$ROOT_URL/chat` | Org IM |
+
+- Argos CLI: `ARGOS_DASH_URL=$ROOT_URL`. Humans download `dash.env` from Argos → CLI. Do not point operators at a separate argos-dash or Benchyard host.
+- Open a ticket from a failing case only when **both** `work` and `argos` are true.
+- Benchyard Console and standalone argos-dash are retired into these modules.
+
+Follow the live skill **Optional modules** section when `skill_url` is available.
 
 ## Instance configuration
 
@@ -29,7 +46,7 @@ When the user asks to log in, first explain: **网页登录不等于 MCP 授权�
 - **Not connected / authentication required / 401:** open the installed Acahti plugin details, find its MCP server connection and open its settings (gear). Choose the sign-in / Authenticate action if shown. Have the user finish their own OAuth in the browser, then return to Codex. For a standalone CLI connection, use `codex mcp login <actual-server-name>`. Do not add a duplicate server or send the user to the website's ordinary login page as a substitute.
 - **Transport, timeout or initialization error:** report the actual startup error and endpoint. Diagnose network/server compatibility; do not repeatedly ask for login without an authentication error.
 - **Connected but tools absent:** verify this task's execution environment supports the bundled connection, refresh/reconnect as available, then start a new local task if its tool inventory is stale. Web/cloud and desktop-local connections are not interchangeable. If status is inaccessible, say it is unknown and ask for the connection's displayed status, not credentials.
-- **Success:** call MCP `whoami`, confirm the intended account and instance, then call `inbox` or the requested tool. A successful browser login or repository page is not an MCP acceptance test.
+- **Success:** call MCP `whoami`, confirm the intended account and instance, note `modules`, then call `inbox` or the requested tool. A successful browser login or repository page is not an MCP acceptance test.
 
 Give one concrete next action matching the observed state. Do not repeat a generic “go log in” message or claim success without a successful tool call.
 

@@ -1,0 +1,22 @@
+---
+description: Optional Acahti Work / Argos / Chat modules. Use when the user mentions tickets, todos, docs, argos runs, dash, chat, ACAHTI_MODULES, or whoami.modules.
+alwaysApply: false
+---
+
+# Optional modules (Work / Argos / Chat)
+
+Read `whoami.modules` (`work` / `argos` / `chat`). Same shape on `GET /ui/public`. Default all off — do not invent missing tabs or APIs.
+
+| Flag | SPA | Notes |
+|---|---|---|
+| `work` | `$ROOT_URL/work` | Tickets · Todos · Docs (human only; no bygent) |
+| `argos` | `$ROOT_URL/argos` | Run browser; ingest on this island; deep link `/argos/runs/{sid}` |
+| `chat` | `$ROOT_URL/chat` | Org IM |
+
+When a flag is true, browser or session cookie use of that SPA and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed. Git / PR / CI / secrets stay MCP-first — do not use the browser to replace those tools.
+
+- Argos CLI: `ARGOS_DASH_URL=$ROOT_URL`. Prefer Argos → CLI (`dash.env`). Do not point to a separate argos-dash or Benchyard host.
+- Open a ticket from a failing case only when **both** `work` and `argos` are true.
+- Benchyard Console and standalone argos-dash are retired into these modules.
+
+Fetch `whoami.skill_url` for the instance's full Optional modules text.

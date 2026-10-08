@@ -49,7 +49,8 @@ def build(source, instance, workspace, revision="1"):
     manifest["interface"]["longDescription"] = (
         f"{workspace} workspace edition. MCP endpoint is preconfigured; each member must authorize "
         "the plugin MCP connection with their own OAuth account. Website login does not authorize MCP. "
-        "Use MCP first for identity, repositories and CI. Optional trusted hooks provide author reminders."
+        "Use MCP first for identity, repositories and CI. Read whoami.modules for optional Work/Argos/Chat. "
+        "Optional trusted hooks provide author reminders."
     )
     files[".codex-plugin/plugin.json"] = encode(manifest)
     files[".mcp.json"] = encode({"mcpServers": {"acahti": {"type": "http", "url": url}}})
