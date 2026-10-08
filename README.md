@@ -47,8 +47,8 @@ Reminder hooks do not enforce a Git-level block and do not change Git configurat
 Never paste tokens or passwords into an agent conversation.
 
 When `modules.work` / `argos` / `chat` are true, agents may use the instance SPA
-(`$ROOT_URL/work`, `/argos`, `/chat`) for those surfaces. Git / PR / CI stay
-MCP-first. Do not send operators to Benchyard or a standalone Argos dash host.
+(`$ROOT_URL/tickets`, `/todos`, `/docs`, `/argos`, Chat dock) for those surfaces.
+Git / PR / CI stay MCP-first.
 
 ## Develop
 

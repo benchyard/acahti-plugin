@@ -9,7 +9,7 @@ Use MCP first for identity, repositories, PRs and CI. Read `whoami.modules` for 
 3. Return to a local Codex task; start a new task if tools have not refreshed. Ask: **通过 MCP 检查我的 Acahti 身份、modules 和待处理事项**.
 4. Success requires MCP `whoami` for the intended account and a successful `inbox` call. Logging into the website is a separate operation.
 
-Missing tools: inspect connection status first. Authenticate for missing/expired authorization; diagnose transport errors without repeated login attempts. Do not silently substitute a browser or REST for MCP **except** enabled module SPAs (`/work`, `/argos`, `/chat` and matching `/ui/*`). Never paste passwords or tokens into a task.
+Missing tools: inspect connection status first. Authenticate for missing/expired authorization; diagnose transport errors without repeated login attempts. Do not silently substitute a browser or REST for MCP **except** enabled module SPAs (`/tickets`, `/todos`, `/docs`, `/argos`, Chat dock and matching `/ui/*`). Never paste passwords or tokens into a task.
 
 ## Git author
 

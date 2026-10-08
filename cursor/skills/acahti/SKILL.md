@@ -11,4 +11,4 @@ MCP is this plugin. Do not add `acahti` to `~/.cursor/mcp.json`.
 
 For commits and pushes targeting Acahti, follow rule `git-author`: resolve the intended destination, call MCP `whoami`, and use its `git_name` / `git_email`. Include merge/pull paths that create commits. Other remote targets are unaffected even in a mixed-remote repository.
 
-For Work / Argos / Chat, follow rule `island-modules` and the live skill **Optional modules** section. Do not invent modules when flags are false. Do not send operators to Benchyard or a standalone Argos dash.
+For Tickets / Todos / Docs / Argos / Chat, follow rule `island-modules` and the live skill **Optional modules** section. Do not invent modules when flags are false.
