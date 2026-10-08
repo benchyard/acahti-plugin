@@ -1,6 +1,6 @@
 # Acahti — SAIDC workspace
 
-Version: `1.7.1+saidc.gitf7e778180d5c`
+Version: `1.7.1+saidc.git5e9ff96d4f32`
 
 MCP endpoint: `https://acahti.s-aidc.com/mcp`
 

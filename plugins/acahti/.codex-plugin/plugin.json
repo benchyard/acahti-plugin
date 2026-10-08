@@ -1,12 +1,12 @@
 {
   "name": "acahti-saidc",
-  "version": "1.7.1+saidc.gitf7e778180d5c",
+  "version": "1.7.1+saidc.git5e9ff96d4f32",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "SAIDC"
   },
   "homepage": "https://github.com/lpythu/acahti",
-  "repository": "https://github.com/lpythu/acahti-plugin",
+  "repository": "https://github.com/benchyard/acahti-plugin",
   "keywords": [
     "acahti",
     "git",
