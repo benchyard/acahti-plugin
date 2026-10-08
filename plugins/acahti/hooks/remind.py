@@ -5,6 +5,7 @@ import sys
 
 CONTEXT = (
     "Use MCP first for Acahti work; website login is not MCP OAuth. "
+    "Read whoami.modules for optional Work/Argos/Chat (SPA only when flags are on). "
     "Apply author policy only to commits and pushes intended for Acahti, not "
     "every operation in a repository that happens to have an Acahti remote. "
     "Resolve the actual destination; if ambiguous, clarify before changing identity. "

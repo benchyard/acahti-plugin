@@ -1,7 +1,7 @@
 {
   "name": "acahti",
-  "version": "1.6.1+saidc.gitfd7aef424f78",
-  "description": "Acahti git, pull requests, pipelines, and CI for your chosen Acahti instance.",
+  "version": "1.7.0+saidc.git540b5ece9350",
+  "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "SAIDC"
   },
@@ -11,13 +11,16 @@
     "acahti",
     "git",
     "mcp",
-    "ci"
+    "ci",
+    "work",
+    "argos",
+    "chat"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Acahti",
-    "shortDescription": "Acahti git, PRs, pipelines, and commit checks.",
-    "longDescription": "SAIDC workspace edition. MCP endpoint is preconfigured; each member must authorize the plugin MCP connection with their own OAuth account. Website login does not authorize MCP. Use MCP first for identity, repositories and CI. Optional trusted hooks provide author reminders.",
+    "shortDescription": "Acahti git, CI, and optional Work/Argos/Chat.",
+    "longDescription": "SAIDC workspace edition. MCP endpoint is preconfigured; each member must authorize the plugin MCP connection with their own OAuth account. Website login does not authorize MCP. Use MCP first for identity, repositories and CI. Read whoami.modules for optional Work/Argos/Chat. Optional trusted hooks provide author reminders.",
     "developerName": "SAIDC",
     "category": "Productivity",
     "capabilities": [
@@ -26,8 +29,8 @@
     ],
     "logo": "./assets/logo.svg",
     "defaultPrompt": [
-      "通过 MCP 检查我的 Acahti 连接、身份和待处理事项；未连接时指导我完成插件 OAuth",
-      "使用 Acahti MCP 查看当前仓库的 PR 和流水线状态",
+      "通过 MCP 检查我的 Acahti 连接、身份、whoami.modules 和待处理事项；未连接时指导我完成插件 OAuth",
+      "使用 Acahti MCP 查看当前仓库的 PR 和流水线状态；若 modules.argos 开启，说明 Argos 运行入口",
       "提交代码前通过 Acahti MCP 核验 Author，设置当前仓库的 Git 身份并检查 CI"
     ]
   },
