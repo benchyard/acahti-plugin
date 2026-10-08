@@ -1,22 +1,22 @@
 {
-  "version": "1.7.0+saidc.git540b5ece9350",
+  "version": "1.7.1+saidc.gitaadacf3d8eba",
   "workspace": "SAIDC",
   "mcpEndpoint": "https://acahti.s-aidc.com/mcp",
   "sourceFilesSHA256": {
-    ".codex-plugin/plugin.json": "6c1b4b169015be47f243150578a2067d531029dc7895c417eeb0d317fbfd839f",
-    "README.md": "9167750cf34ee3e0a2154159c1ffe1ab67ce199060a4aecd2c282e3dcaab4dad",
+    ".codex-plugin/plugin.json": "c5fab85d6b78c4973a89ffdfe6a285c67c496da2387c262317544d93f9d35fe0",
+    "README.md": "a9b7891fb60f8c63f72152bac2dbc8fbdff4c2c5d0d4a6ce9d1eee5a566a002d",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "73830c61b14f3473a4990bba2cc4c34c009bbdbb88df751606c8dbb456f12307",
-    "skills/acahti/SKILL.md": "a7fc26b01f79bf68581628aedd7e0db93d0c7cb67258411710e0bc9232b382bb"
+    "skills/acahti/SKILL.md": "358d3398306d0dfee17a1e7c895c821299d58071e59d70823b7e7bd0970c81a9"
   },
   "packageFilesSHA256": {
-    ".codex-plugin/plugin.json": "1165df9835e1942b4114c36358f14314ef111dccfa0cf673faf32c3cc2d0c835",
+    ".codex-plugin/plugin.json": "e3e2ffa1366dcc23271ddddabd66e206ec5bb14057d121aa9a7dcbc33b31f673",
     ".mcp.json": "52d8739f40e202447b8a040e87c017fe1d79ef6b190e4936eecc480083810c8e",
-    "README.md": "c583a7c1df2d54b9f66337d178b811d77a7b89d57abe551455cc84a60f13ca8d",
+    "README.md": "4bf4770061038339318082be1d21ae811f3310a8e9cb85ec7aaaf1bf758c55d4",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "73830c61b14f3473a4990bba2cc4c34c009bbdbb88df751606c8dbb456f12307",
-    "skills/acahti/SKILL.md": "1878f5a6101c2c8e6c8cc8c189297ef823710f9788e4299472000bb8fe6c5089"
+    "skills/acahti/SKILL.md": "5b679e7de68edaef7a48dbe1928e59877d9116f0b926967fd8aa5e80cf5f3e61"
   }
 }

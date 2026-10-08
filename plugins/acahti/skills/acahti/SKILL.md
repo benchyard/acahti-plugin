@@ -13,7 +13,7 @@ description: >-
 
 Use the selected instance's MCP tools for identity, repository queries, PRs, pipelines and CI. Discover the tools available in this session, call `whoami`, read `whoami.modules`, then use the relevant tool (for example `repo_list` or `inbox`). A loaded skill is not proof that the MCP connection is ready.
 
-Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. **Exception:** when `whoami.modules` enables `work`, `argos`, or `chat`, browser or session cookie use of `$ROOT_URL/work`, `/argos`, `/chat` and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed for those surfaces only. Git / PR / CI / secrets stay MCP-first. Browser use is also appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
+Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. **Exception:** when `whoami.modules` enables `work`, `argos`, or `chat`, browser or session cookie use of `$ROOT_URL/tickets`, `/todos`, `/docs`, `/argos`, Chat dock / `/chat`, and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed for those surfaces only. Git / PR / CI / secrets stay MCP-first. Browser use is also appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
 
 After `whoami` succeeds, fetch its `skill_url` for current instance-specific workflows. Fetching this public instruction document is permitted; it is not a substitute for MCP business tools. Check that the URL belongs to the intended instance. If it cannot be retrieved, explain the failure before making changes that depend on those instructions. Keep MCP-first routing, identity verification and repository scoping in force.
 
@@ -23,13 +23,12 @@ Read `whoami.modules` (`work` / `argos` / `chat`). Same flags on `GET /ui/public
 
 | Flag | SPA | Notes |
 |---|---|---|
-| `work` | `$ROOT_URL/work` | Tickets · Todos · Docs (human collaboration; no bygent) |
+| `work` | `$ROOT_URL/tickets`, `/todos`, `/docs` | Top-level tabs (human collaboration; no bygent) |
 | `argos` | `$ROOT_URL/argos` | Run browser; ingest `POST $ROOT_URL/api/runs` with `ARGOS_TOKEN`; deep link `/argos/runs/{sid}` |
-| `chat` | `$ROOT_URL/chat` | Org IM |
+| `chat` | header launcher + right dock; mobile `/chat` | Org IM |
 
-- Argos CLI: `ARGOS_DASH_URL=$ROOT_URL`. Humans download `dash.env` from Argos → CLI. Do not point operators at a separate argos-dash or Benchyard host.
+- Argos CLI: `ARGOS_DASH_URL=$ROOT_URL`. Humans download `dash.env` from Argos → CLI.
 - Open a ticket from a failing case only when **both** `work` and `argos` are true.
-- Benchyard Console and standalone argos-dash are retired into these modules.
 
 Follow the live skill **Optional modules** section when `skill_url` is available.
 
