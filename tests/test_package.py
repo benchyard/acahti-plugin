@@ -69,15 +69,17 @@ class ReleaseTests(unittest.TestCase):
             self.assertNotIn("pluginId", marketplace["plugins"][0])
 
     def test_marketplace_preserves_plugin_id(self):
-        config = {"workspace":"Example", "instance":"https://example.com", "pluginId":"Plugin_123abc"}
+        config = {"workspace":"Example", "instance":"https://example.com", "pluginId":"Plugin_123abc", "pluginName":"acahti-example"}
         with tempfile.TemporaryDirectory() as d:
             output = Path(d)
             exporter.export(config, output, "a" * 40)
             marketplace = json.loads((output / ".agents/plugins/marketplace.json").read_text())
             entry = marketplace["plugins"][0]
             self.assertEqual(entry["pluginId"], config["pluginId"])
+            self.assertEqual(entry["name"], "acahti-example")
             plugin = output / entry["source"]["path"]
             manifest = json.loads((plugin / ".codex-plugin/plugin.json").read_text())
+            self.assertEqual(manifest["name"], entry["name"])
             self.assertEqual(manifest["version"], json.loads((ROOT / "codex/.codex-plugin/plugin.json").read_text())["version"].split("+", 1)[0] + "+example.git" + "a" * 12)
             metadata = json.loads((output / "build.json").read_text())
             for name, expected in metadata["filesSHA256"].items():

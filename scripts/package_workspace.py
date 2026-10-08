@@ -24,7 +24,9 @@ def endpoint(value):
     return urlunsplit((u.scheme, u.netloc, path, "", ""))
 
 
-def build(source, instance, workspace, revision="1"):
+def build(source, instance, workspace, revision="1", plugin_name="acahti"):
+    if not re.fullmatch(r"[a-z][a-z0-9-]*", plugin_name):
+        raise ValueError("plugin name must be a lowercase slug")
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9-]*", workspace):
         raise ValueError("workspace must be a short alphanumeric name, optionally with hyphens")
     if not re.fullmatch(r"[A-Za-z0-9-]+", revision):
@@ -45,6 +47,9 @@ def build(source, instance, workspace, revision="1"):
     manifest = json.loads(files[".codex-plugin/plugin.json"])
     version = manifest["version"].split("+", 1)[0] + "+" + workspace.lower() + "." + revision
     manifest["version"] = version
+    manifest["name"] = plugin_name
+    if plugin_name != "acahti":
+        manifest["interface"]["displayName"] = f"Acahti {workspace}"
     manifest["mcpServers"] = "./.mcp.json"
     manifest["interface"]["longDescription"] = (
         f"{workspace} workspace edition. MCP endpoint is preconfigured; each member must authorize "

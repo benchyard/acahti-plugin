@@ -16,7 +16,8 @@ def export(config, output, commit):
     plugin_id = config.get("pluginId")
     if plugin_id is not None and not re.fullmatch(r"[Pp]lugin_[A-Za-z0-9]+", plugin_id):
         raise ValueError("invalid workspace plugin ID")
-    files, version = build(ROOT / "codex", config["instance"], config["workspace"], "git" + commit[:12])
+    plugin_name = config.get("pluginName", "acahti")
+    files, version = build(ROOT / "codex", config["instance"], config["workspace"], "git" + commit[:12], plugin_name)
     # This tree is generated output, never a source checkout.
     output = output.resolve()
     if output == ROOT or output.is_relative_to(ROOT / "codex") or ROOT.is_relative_to(output):
@@ -33,7 +34,7 @@ def export(config, output, commit):
     marketplace.write_bytes(encode({
         "name": "acahti-" + config["workspace"].lower(),
         "interface": {"displayName": config["workspace"] + " Acahti"},
-        "plugins": [{"name": "acahti", **({"pluginId": plugin_id} if plugin_id else {}),
+        "plugins": [{"name": plugin_name, **({"pluginId": plugin_id} if plugin_id else {}),
                      "source": {"source": "local", "path": "./plugins/acahti"},
                      "category": "Productivity",
                      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}}]

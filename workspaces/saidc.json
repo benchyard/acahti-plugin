@@ -1,4 +1,6 @@
 {
   "workspace": "SAIDC",
-  "instance": "https://acahti.s-aidc.com"
+  "instance": "https://acahti.s-aidc.com",
+  "pluginName": "acahti-saidc",
+  "pluginId": "Plugin_1e4e77f91270819182876aef6d4766bb"
 }
