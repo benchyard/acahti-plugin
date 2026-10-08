@@ -45,7 +45,7 @@ def export(config, output, commit):
     (output / "build.json").write_bytes(encode(metadata))
     (output / "README.md").write_text(
         "# SAIDC Acahti workspace release\n\n"
-        "Generated from https://github.com/lpythu/acahti-plugin/tree/" + commit + ".\n\n"
+        "Generated from https://github.com/benchyard/acahti-plugin/tree/" + commit + ".\n\n"
         "Do not edit this branch directly. Change main and let the workspace-release workflow rebuild it.\n"
         "An optional pluginId can adopt an unmanaged plugin; do not bind a plugin managed by another source. Installation policies are managed in ChatGPT.\n"
     )

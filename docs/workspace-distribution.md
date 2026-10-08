@@ -18,7 +18,7 @@ Tests: install `tests/requirements.txt`, then run `python3 -m unittest discover 
 
 On relevant changes to `main`, `.github/workflows/workspace-release.yml` runs tests, generates the workspace package and publishes the `workspace-saidc` branch. The generated version includes the source commit, so changed contents never silently reuse an installed version. `build.json` records provenance. Failed builds do not publish.
 
-Import `https://github.com/lpythu/acahti-plugin` in ChatGPT Admin → Plugins → Add → Import marketplace, leave Path empty and select branch `workspace-saidc`. The marketplace entry's `pluginId` links the existing Acahti plugin, preserving its ID and workspace installation policy. Do not delete the plugin to update it. GitHub-managed plugins are updated by sync rather than ZIP uploads.
+Import `https://github.com/benchyard/acahti-plugin` in ChatGPT Admin → Plugins → Add → Import marketplace, leave Path empty and select branch `workspace-saidc`. The marketplace entry uses the distinct name `acahti-saidc` and binds the uploaded **Acahti SAIDC** plugin ID, preserving its workspace installation policy. The legacy **Acahti** plugin stays on its old source with automatic sync paused. A plugin already managed by another GitHub source cannot be adopted by a new source; use a distinct plugin name and its own unmanaged ID during migration. Do not delete the plugin to update it. GitHub-managed plugins are updated by sync rather than ZIP uploads.
 
 After the workflow succeeds, the workspace checks for updates daily; use Marketplaces → Sync now for immediate rollout and check the import report. Changing hooks still requires members to review their trust. Changing OAuth endpoint/account may require authentication; sync does not share credentials.
 
