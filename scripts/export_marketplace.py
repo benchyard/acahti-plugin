@@ -13,8 +13,8 @@ from package_workspace import ROOT, build, encode
 def export(config, output, commit):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("source commit must be a full Git SHA")
-    plugin_id = config["pluginId"]
-    if not re.fullmatch(r"[Pp]lugin_[A-Za-z0-9]+", plugin_id):
+    plugin_id = config.get("pluginId")
+    if plugin_id is not None and not re.fullmatch(r"[Pp]lugin_[A-Za-z0-9]+", plugin_id):
         raise ValueError("invalid workspace plugin ID")
     files, version = build(ROOT / "codex", config["instance"], config["workspace"], "git" + commit[:12])
     # This tree is generated output, never a source checkout.
@@ -33,7 +33,7 @@ def export(config, output, commit):
     marketplace.write_bytes(encode({
         "name": "acahti-" + config["workspace"].lower(),
         "interface": {"displayName": config["workspace"] + " Acahti"},
-        "plugins": [{"name": "acahti", "pluginId": plugin_id,
+        "plugins": [{"name": "acahti", **({"pluginId": plugin_id} if plugin_id else {}),
                      "source": {"source": "local", "path": "./plugins/acahti"},
                      "category": "Productivity",
                      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}}]
@@ -46,7 +46,7 @@ def export(config, output, commit):
         "# SAIDC Acahti workspace release\n\n"
         "Generated from https://github.com/lpythu/acahti-plugin/tree/" + commit + ".\n\n"
         "Do not edit this branch directly. Change main and let the workspace-release workflow rebuild it.\n"
-        "The marketplace maps the existing workspace plugin ID; installation policies are managed in ChatGPT.\n"
+        "An optional pluginId can adopt an unmanaged plugin; do not bind a plugin managed by another source. Installation policies are managed in ChatGPT.\n"
     )
     print(f"Exported {version} to {output}")
 

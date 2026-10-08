@@ -60,6 +60,14 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaises(FileExistsError): pkg.write_archive(a, files)
             with zipfile.ZipFile(a) as z: self.assertEqual(set(z.namelist()), set(files))
 
+    def test_marketplace_without_legacy_plugin_binding(self):
+        config = {"workspace": "SAIDC", "instance": "https://acahti.s-aidc.com"}
+        with tempfile.TemporaryDirectory() as d:
+            output = Path(d)
+            exporter.export(config, output, "a" * 40)
+            marketplace = json.loads((output / ".agents/plugins/marketplace.json").read_text())
+            self.assertNotIn("pluginId", marketplace["plugins"][0])
+
     def test_marketplace_preserves_plugin_id(self):
         config = {"workspace":"Example", "instance":"https://example.com", "pluginId":"Plugin_123abc"}
         with tempfile.TemporaryDirectory() as d:
