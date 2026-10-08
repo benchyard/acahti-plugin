@@ -1,6 +1,6 @@
 {
-  "name": "acahti",
-  "version": "1.7.1+saidc.gitddf49571f920",
+  "name": "acahti-saidc",
+  "version": "1.7.1+saidc.gitf7e778180d5c",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "SAIDC"
@@ -18,7 +18,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Acahti",
+    "displayName": "Acahti SAIDC",
     "shortDescription": "Acahti git, CI, and optional Work/Argos/Chat.",
     "longDescription": "SAIDC workspace edition. MCP endpoint is preconfigured; each member must authorize the plugin MCP connection with their own OAuth account. Website login does not authorize MCP. Use MCP first for identity, repositories and CI. Read whoami.modules for optional Work/Argos/Chat. Optional trusted hooks provide author reminders.",
     "developerName": "SAIDC",

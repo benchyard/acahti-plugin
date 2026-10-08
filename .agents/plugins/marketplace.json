@@ -5,7 +5,8 @@
   },
   "plugins": [
     {
-      "name": "acahti",
+      "name": "acahti-saidc",
+      "pluginId": "Plugin_1e4e77f91270819182876aef6d4766bb",
       "source": {
         "source": "local",
         "path": "./plugins/acahti"
