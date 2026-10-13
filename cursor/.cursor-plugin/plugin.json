@@ -1,12 +1,12 @@
 {
   "name": "acahti",
   "displayName": "Acahti",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "Island git, PRs, pipelines, secrets, commit checks, and optional Work/Argos/Chat modules.",
   "author": {
     "name": "SAIDC"
   },
-  "homepage": "https://github.com/lpythu/acahti",
+  "homepage": "https://acahti.benchyard.com",
   "repository": "https://github.com/benchyard/acahti-plugin",
   "logo": "assets/logo.svg",
   "keywords": ["acahti", "git", "mcp", "ci", "work", "argos", "chat"],
