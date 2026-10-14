@@ -15,7 +15,7 @@ Use the selected instance's MCP tools for identity, repository queries, PRs, pip
 
 Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. **Exception:** when `whoami.modules` enables `work`, `argos`, or `chat`, browser or session cookie use of `$ROOT_URL/tickets`, `/todos`, `/docs`, `/argos`, Chat dock / `/chat`, and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed for those surfaces only. Git / PR / CI / secrets stay MCP-first. Browser use is also appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
 
-After `whoami` succeeds, fetch its `skill_url` for current instance-specific workflows. Fetching this public instruction document is permitted; it is not a substitute for MCP business tools. Check that the URL belongs to the intended instance. If it cannot be retrieved, explain the failure before making changes that depend on those instructions. Keep MCP-first routing, identity verification and repository scoping in force.
+After `whoami` succeeds, fetch its `skill_url` (the Acahti product skill, https://acahti.benchyard.com/skill.md) for current workflows. Fetching this public instruction document is permitted; it is not a substitute for MCP business tools. Accept a `skill_url` only on `acahti.benchyard.com`; instance-specific values come from `whoami` itself. If it cannot be retrieved, explain the failure before making changes that depend on those instructions. Keep MCP-first routing, identity verification and repository scoping in force.
 
 ## Optional modules
 
