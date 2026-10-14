@@ -103,8 +103,8 @@ class ReleaseTests(unittest.TestCase):
     def test_versions_and_modules_guidance(self):
         cursor = json.loads((ROOT / "cursor/.cursor-plugin/plugin.json").read_text())
         codex = json.loads((ROOT / "codex/.codex-plugin/plugin.json").read_text())
-        self.assertEqual(cursor["version"], "1.7.1")
-        self.assertEqual(codex["version"], "1.7.1")
+        self.assertEqual(cursor["version"], "1.8.0")
+        self.assertEqual(codex["version"], "1.8.0")
         self.assertEqual(cursor["version"], codex["version"])
         skill = (ROOT / "codex/skills/acahti/SKILL.md").read_text()
         self.assertIn("## Optional modules", skill)

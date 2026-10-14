@@ -4,7 +4,7 @@
 
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-[Cursor package](cursor/README.md) · [Codex package](codex/README.md) · [Acahti](https://github.com/lpythu/acahti) · [Workspace distribution](docs/workspace-distribution.md)
+[Cursor package](cursor/README.md) · [Codex package](codex/README.md) · [Acahti](https://acahti.benchyard.com) · [Workspace distribution](docs/workspace-distribution.md)
 
 Two small, host-specific packages connect Cursor and Codex to Acahti's Git,
 pull requests, pipelines, commit checks, packages, and optional product modules

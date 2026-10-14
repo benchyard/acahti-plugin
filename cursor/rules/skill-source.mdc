@@ -6,7 +6,7 @@ alwaysApply: false
 # Live skill and MCP
 
 1. Discover MCP tools this session (do not trust a cached tool list)
-2. Call `whoami`, read `whoami.modules`, then GET `whoami.skill_url` and follow that document
+2. Call `whoami`, read `whoami.modules`, then GET `whoami.skill_url` (the product skill on acahti.benchyard.com) and follow that document
 3. For Work / Argos / Chat tasks, also follow rule `island-modules` and the live skill Optional modules section
 4. MCP is this plugin — do not add a duplicate `acahti` server to `~/.cursor/mcp.json`
 5. Do not `git config --global` for Acahti identity
