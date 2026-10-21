@@ -1,9 +1,9 @@
 {
   "name": "acahti",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
-    "name": "SAIDC"
+    "name": "Benchyard"
   },
   "homepage": "https://acahti.benchyard.com",
   "repository": "https://github.com/benchyard/acahti-plugin",
@@ -21,7 +21,7 @@
     "displayName": "Acahti",
     "shortDescription": "Acahti git, CI, and optional Work/Argos/Chat.",
     "longDescription": "Use MCP first for Acahti identity, repositories, PRs and CI. Optional instance modules (work, argos, chat) appear in whoami.modules — use the SPA when enabled. Configure your instance in native MCP settings, then complete individual OAuth. Website login is separate from MCP authorization. Optional trusted hooks remind the agent to verify Git author before committing.",
-    "developerName": "SAIDC",
+    "developerName": "Benchyard",
     "category": "Productivity",
     "capabilities": [
       "Read",
