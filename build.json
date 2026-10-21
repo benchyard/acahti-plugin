@@ -1,15 +1,15 @@
 {
-  "sourceCommit": "56810d5ccda93d34ede1b682f5e8372cf16bc1de",
-  "pluginVersion": "1.8.0+saidc.git56810d5ccda9",
+  "sourceCommit": "a90f87fd22609c975ec308e6e036a10c1d917950",
+  "pluginVersion": "1.8.1+saidc.gita90f87fd2260",
   "pluginId": "Plugin_1e4e77f91270819182876aef6d4766bb",
   "filesSHA256": {
-    ".codex-plugin/plugin.json": "368e0491038d7177e1fd6489eb65ac6e85f23ce9c510e60133db25ff3fe18f0b",
+    ".codex-plugin/plugin.json": "ac44e9d3ec34f985ff07eeeae6546cce329afdc0c7e73da3659d8edae07101e8",
     ".mcp.json": "52d8739f40e202447b8a040e87c017fe1d79ef6b190e4936eecc480083810c8e",
-    "README.md": "d97f208e61e1fb2fe77fef5502557cb23e725f389709736b17298b654243f3d6",
+    "README.md": "e6a41b6424931df06f3f585991d818acaa9d4f3b621d245c24436bf72e7eb112",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "73830c61b14f3473a4990bba2cc4c34c009bbdbb88df751606c8dbb456f12307",
-    "release.json": "8a70341cd834cbe442bf7d58d9176d50d57555996073d71eff0fc3397dddfd59",
+    "release.json": "09370d22802b2b5b20ef8f82f6f814c2a9666f404835a61e822286a6d5f87fc7",
     "skills/acahti/SKILL.md": "01e0dbed6070a478ec8d14dc2c579776dd58aad8db5938e6bcf1a229396cad1e"
   }
 }
