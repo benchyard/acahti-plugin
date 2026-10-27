@@ -1,7 +1,7 @@
 {
   "name": "acahti",
   "displayName": "Acahti",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Island git, PRs, pipelines, secrets, commit checks, and optional Work/Argos/Chat modules.",
   "author": {
     "name": "Benchyard"
@@ -9,18 +9,28 @@
   "homepage": "https://acahti.benchyard.com",
   "repository": "https://github.com/benchyard/acahti-plugin",
   "logo": "assets/logo.svg",
-  "keywords": ["acahti", "git", "mcp", "ci", "work", "argos", "chat"],
+  "keywords": [
+    "acahti",
+    "git",
+    "mcp",
+    "ci",
+    "work",
+    "argos",
+    "chat"
+  ],
   "category": "integrations",
   "mcpServers": "./mcp.json",
   "variables": {
     "type": "object",
     "properties": {
-      "ACAHTI_URL": {
+      "ACAHTI_ROOT_URL": {
         "type": "string",
         "title": "Acahti instance URL",
         "description": "Root URL of your Acahti instance, no trailing slash (example: https://acahti.example.com)."
       }
     },
-    "required": ["ACAHTI_URL"]
+    "required": [
+      "ACAHTI_ROOT_URL"
+    ]
   }
 }

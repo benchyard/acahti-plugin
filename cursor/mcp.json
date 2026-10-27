@@ -2,7 +2,10 @@
   "mcpServers": {
     "acahti": {
       "type": "http",
-      "url": "${ACAHTI_URL}/mcp"
+      "url": "${ACAHTI_ROOT_URL}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:ACAHTI_TOKEN}"
+      }
     }
   }
 }

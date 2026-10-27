@@ -16,7 +16,7 @@ agent runtime.
 ```mermaid
 flowchart LR
   Client[Cursor or Codex] --> Plugin[Plugin guidance]
-  Client -->|Individual OAuth / MCP| Acahti[Your Acahti instance]
+  Client -->|Personal token / MCP or CLI| Acahti[Your Acahti instance]
   Acahti --> Git[Repositories and PRs]
   Acahti --> CI[Checks and pipeline logs]
   Acahti --> Packages[Language packages]
@@ -27,8 +27,8 @@ flowchart LR
 
 | Host | Package | Connection |
 |---|---|---|
-| Cursor | `cursor/` via the repository marketplace | Set `ACAHTI_URL`, then complete MCP OAuth |
-| Codex | `codex/` via the repository marketplace | Configure `/mcp` in native MCP settings and authenticate |
+| Cursor | `cursor/` via the repository marketplace | Set `ACAHTI_ROOT_URL` and provide `ACAHTI_TOKEN` in the environment |
+| Codex | `codex/` via the repository marketplace | Follow first-use Benchyard guidance; native MCP or CLI with a personal token |
 
 Follow the linked package instructions for your host. Reuse an existing connection;
 do not register the same server twice. Workspace distributions can bundle a chosen
@@ -36,7 +36,7 @@ endpoint without bundling members' credentials.
 
 ## Verify
 
-Ask your agent to check the Acahti connection through MCP, call `whoami`, confirm
+Ask your agent to check the Acahti connection through MCP or CLI, call `whoami`, confirm
 the intended account and instance, read `whoami.modules`, and fetch `inbox`.
 Opening the website or completing a browser redirect alone does not verify MCP
 tool availability.
@@ -48,7 +48,7 @@ Never paste tokens or passwords into an agent conversation.
 
 When `modules.work` / `argos` / `chat` are true, agents may use the instance SPA
 (`$ROOT_URL/tickets`, `/todos`, `/docs`, `/argos`, Chat dock) for those surfaces.
-Git / PR / CI stay MCP-first.
+Git / PR / CI use MCP or CLI.
 
 ## Develop
 

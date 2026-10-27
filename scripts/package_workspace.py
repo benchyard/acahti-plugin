@@ -52,13 +52,13 @@ def build(source, instance, workspace, revision="1", plugin_name="acahti"):
         manifest["interface"]["displayName"] = f"Acahti {workspace}"
     manifest["mcpServers"] = "./.mcp.json"
     manifest["interface"]["longDescription"] = (
-        f"{workspace} workspace edition. MCP endpoint is preconfigured; each member must authorize "
-        "the plugin MCP connection with their own OAuth account. Website login does not authorize MCP. "
+        f"{workspace} workspace edition. MCP endpoint is preconfigured; each member supplies "
+        "a personal ACAHTI_TOKEN through the environment. Benchyard onboarding uses Secrets and CLI. "
         "Use MCP first for identity, repositories and CI. Read whoami.modules for optional Work/Argos/Chat. "
         "Optional trusted hooks provide author reminders."
     )
     files[".codex-plugin/plugin.json"] = encode(manifest)
-    files[".mcp.json"] = encode({"mcpServers": {"acahti": {"type": "http", "url": url}}})
+    files[".mcp.json"] = encode({"mcpServers": {"acahti": {"type": "http", "url": url, "bearer_token_env_var": "ACAHTI_TOKEN"}}})
     skill = files["skills/acahti/SKILL.md"].decode()
     start = skill.index("## Instance configuration\n")
     end = skill.index("## First use and connection troubleshooting\n", start)
@@ -66,17 +66,17 @@ def build(source, instance, workspace, revision="1", plugin_name="acahti"):
 
 This {workspace} workspace release bundles the intended MCP endpoint in `.mcp.json`. Reuse that plugin connection. Do not ask members to enter an instance URL or create a duplicate standalone server. Discover its actual runtime identifier; it need not be exactly `acahti`.
 
-Each member must authenticate this MCP connection with their own OAuth account. Workspace installation distributes configuration, not shared credentials. Open the plugin's MCP connection settings to authorize it; ordinary website login is separate. Confirm the intended account with MCP `whoami` before doing work. If multiple instances are ambiguous, ask which to use instead of switching silently.
+The intended instance is `{url.removesuffix('/mcp')}`. Use it for first-use guidance and `ACAHTI_ROOT_URL`. Each member sets their personal `ACAHTI_TOKEN` in Benchyard Secrets or the client environment. The bundled HTTP connection reads that variable; no credentials are shipped. If native MCP is unavailable, continue with the CLI against this instance after verifying `whoami`.
 
-The administrator updates the endpoint through the workspace packaging command and republishes the release. Do not change the generic source, local Git remotes or credentials to guess a different host. The bundled connection targets desktop-local tasks; check connection availability explicitly for other execution environments.
+The administrator updates the endpoint through the workspace packaging command. Never guess a different host or transfer credentials when changing an instance.
 
 ''' + skill[end:]
     files["skills/acahti/SKILL.md"] = skill.encode()
     files["README.md"] = (f"# Acahti — {workspace} workspace\n\nVersion: `{version}`\n\nMCP endpoint: `{url}`\n\n"
-        "## 首次使用\n\n1. 安装插件，打开插件详情 → MCP 服务器 → 连接设置（齿轮）。\n"
-        "2. 如果提示未连接，选择 Authenticate / 登录，完成自己的 OAuth 授权。网页登录不等于 MCP 授权，无需发送密码或 Token。\n"
-        "3. 返回本地 Codex 任务；工具未刷新时新建任务，发送：通过 MCP 检查我的 Acahti 身份和待处理事项。\n"
-        "4. 验收必须成功调用 whoami 和 inbox；失败时提供连接状态/错误，不改用网页查数据。\n\n"
+        "## 首次使用\n\n1. 安装插件后发送：连接 Acahti 并检查我的身份和待办。Skill 首次调用会检查连接与配置。\n"
+        "2. 在实例头像菜单 → Access tokens 创建个人 Token，在 Benchyard Secrets 设置 ACAHTI_ROOT_URL 和 ACAHTI_TOKEN；Token 目标主机限定为该实例。\n"
+        "3. 让环境变量在当前任务生效。Agent 使用原生 MCP 或 acahti CLI，无需 OAuth 或 localhost 回调。\n"
+        "4. 成功调用 whoami 和 inbox 后才算连接成功；MCP 可通过 acahti mcp tools 验证。不要把 Token 发到聊天中。\n\n"
         "## Author 提醒\n\n可在 /hooks 审查并信任提醒 hook，需要 Python 3。它只注入规则，不读取凭据、不改 Git、不强制拦截提交。"
         "Skill 要求 Acahti 提交前核验当前 MCP 身份、按 remote host 限定范围、设置并检查有效 author。\n\n"
         "## 发布维护\n\n从最新通用源码用 scripts/package_workspace.py 重新生成包，不在旧 ZIP 上累积修改。"

@@ -24,7 +24,7 @@ Follow `whoami.skill_url` for full detail. This rule covers remotes only.
 ✅ git remote add acahti <whoami.clone_url_template>
 ✅ git push acahti HEAD:dev
 ❌ Replace origin with Acahti when another host is the product remote
-❌ Paste Bearer tokens or read secrets/ for git auth — use MCP OAuth + credential helper
+❌ Paste Bearer tokens or read secrets/ for git auth — use a host-scoped credential helper with the personal token
 ```
 
-On 401, tell the user to finish MCP OAuth for this plugin. Do not ask them to paste a token.
+On 401, follow the skill to check personal-token setup in Benchyard Secrets. Never request tokens in chat.

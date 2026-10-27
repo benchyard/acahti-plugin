@@ -4,7 +4,7 @@ import json
 import sys
 
 CONTEXT = (
-    "Use MCP first for Acahti work; website login is not MCP OAuth. "
+    "Use personal-token MCP or CLI for Acahti. On first use, load the skill and guide Benchyard Secrets setup if needed. "
     "Read whoami.modules for optional Work/Argos/Chat (SPA only when flags are on). "
     "Apply author policy only to commits and pushes intended for Acahti, not "
     "every operation in a repository that happens to have an Acahti remote. "

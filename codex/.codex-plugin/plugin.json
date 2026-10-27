@@ -1,6 +1,6 @@
 {
   "name": "acahti",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "Benchyard"
@@ -20,7 +20,7 @@
   "interface": {
     "displayName": "Acahti",
     "shortDescription": "Acahti git, CI, and optional Work/Argos/Chat.",
-    "longDescription": "Use MCP first for Acahti identity, repositories, PRs and CI. Optional instance modules (work, argos, chat) appear in whoami.modules — use the SPA when enabled. Configure your instance in native MCP settings, then complete individual OAuth. Website login is separate from MCP authorization. Optional trusted hooks remind the agent to verify Git author before committing.",
+    "longDescription": "Connect to Acahti with a personal Access Token. First-use guidance checks Benchyard Secrets and verifies identity through MCP or CLI. Optional Work/Argos/Chat follow whoami.modules. Hooks remind agents about repository-scoped Git identity.",
     "developerName": "Benchyard",
     "category": "Productivity",
     "capabilities": [
@@ -29,7 +29,7 @@
     ],
     "logo": "./assets/logo.svg",
     "defaultPrompt": [
-      "通过 MCP 检查我的 Acahti 连接、身份、whoami.modules 和待处理事项；未连接时指导我完成插件 OAuth",
+      "连接我的 Acahti：检查 Benchyard 配置，缺失时引导我设置个人 Token，然后验证身份和待办",
       "使用 Acahti MCP 查看当前仓库的 PR 和流水线状态；若 modules.argos 开启，说明 Argos 运行入口",
       "提交代码前通过 Acahti MCP 核验 Author，设置当前仓库的 Git 身份并检查 CI"
     ]
