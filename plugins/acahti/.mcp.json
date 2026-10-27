@@ -2,7 +2,8 @@
   "mcpServers": {
     "acahti": {
       "type": "http",
-      "url": "https://acahti.s-aidc.com/mcp"
+      "url": "https://acahti.s-aidc.com/mcp",
+      "bearer_token_env_var": "ACAHTI_TOKEN"
     }
   }
 }

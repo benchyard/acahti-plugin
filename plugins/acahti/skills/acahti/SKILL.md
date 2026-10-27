@@ -1,7 +1,7 @@
 ---
 name: acahti
 description: >-
-  Use MCP first for Acahti identity, repositories, PRs, pipelines and CI.
+  Connect Acahti in Benchyard with personal tokens; use MCP or CLI for repositories, PRs and CI.
   Optional Work/Argos/Chat when whoami.modules flags are on.
   For commits and pushes targeting Acahti, use whoami and setup_local; leave other targets alone.
   Also use for Acahti connection setup and missing MCP tools.
@@ -9,13 +9,11 @@ description: >-
 
 # Acahti
 
-## MCP first
+## Connect and work
 
-Use the selected instance's MCP tools for identity, repository queries, PRs, pipelines and CI. Discover the tools available in this session, call `whoami`, read `whoami.modules`, then use the relevant tool (for example `repo_list` or `inbox`). A loaded skill is not proof that the MCP connection is ready.
+Use native MCP or the `acahti` CLI for the intended instance. Verify `whoami` and read `whoami.modules` before work. On first use, follow the onboarding below even when only the skill was installed.
 
-Do not silently substitute browser automation, web search, REST calls or Git credential extraction for missing MCP tools. **Exception:** when `whoami.modules` enables `work`, `argos`, or `chat`, browser or session cookie use of `$ROOT_URL/tickets`, `/todos`, `/docs`, `/argos`, Chat dock / `/chat`, and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed for those surfaces only. Git / PR / CI / secrets stay MCP-first. Browser use is also appropriate for the user completing the MCP OAuth flow, or for an explicitly requested webpage operation. A website login does not authorize the MCP connection. Never request passwords or tokens in chat.
-
-After `whoami` succeeds, fetch its `skill_url` (the Acahti product skill, https://acahti.benchyard.com/skill.md) for current workflows. Fetching this public instruction document is permitted; it is not a substitute for MCP business tools. Accept a `skill_url` only on `acahti.benchyard.com`; instance-specific values come from `whoami` itself. If it cannot be retrieved, explain the failure before making changes that depend on those instructions. Keep MCP-first routing, identity verification and repository scoping in force.
+After connecting, fetch `whoami.skill_url` on `acahti.benchyard.com` for current product workflows. Instance values come from `whoami`. If the live skill is unavailable, report that and use these packaged instructions for supported operations; stop only for operations whose contract cannot be established. Use the user's requested token authentication even if a published skill still describes OAuth.
 
 ## Optional modules
 
@@ -36,32 +34,38 @@ Follow the live skill **Optional modules** section when `skill_url` is available
 
 This SAIDC workspace release bundles the intended MCP endpoint in `.mcp.json`. Reuse that plugin connection. Do not ask members to enter an instance URL or create a duplicate standalone server. Discover its actual runtime identifier; it need not be exactly `acahti`.
 
-Each member must authenticate this MCP connection with their own OAuth account. Workspace installation distributes configuration, not shared credentials. Open the plugin's MCP connection settings to authorize it; ordinary website login is separate. Confirm the intended account with MCP `whoami` before doing work. If multiple instances are ambiguous, ask which to use instead of switching silently.
+The intended instance is `https://acahti.s-aidc.com`. Use it for first-use guidance and `ACAHTI_ROOT_URL`. Each member sets their personal `ACAHTI_TOKEN` in Benchyard Secrets or the client environment. The bundled HTTP connection reads that variable; no credentials are shipped. If native MCP is unavailable, continue with the CLI against this instance after verifying `whoami`.
 
-The administrator updates the endpoint through the workspace packaging command and republishes the release. Do not change the generic source, local Git remotes or credentials to guess a different host. The bundled connection targets desktop-local tasks; check connection availability explicitly for other execution environments.
+The administrator updates the endpoint through the workspace packaging command. Never guess a different host or transfer credentials when changing an instance.
 
 ## First use and connection troubleshooting
 
-When the user asks to log in, first explain: **网页登录不等于 MCP 授权，请连接插件里的 MCP 服务器。** Inspect the available connection status before choosing the next step.
+1. Discover available MCP tools. If the intended connection works, call `whoami` and continue. In Benchyard or a shell without native MCP tools, use the `acahti` CLI. Check `command -v acahti` and the presence (never values) of `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN`; also try `acahti auth status` for a stored login. Do not read credentials files or extract tokens from Git.
+2. If the CLI is missing, install `npm install -g @benchyard/acahti` using the environment's installation procedure. An installed skill does not install the CLI automatically.
+3. If configuration is missing, give this concrete guidance in the user's language: “在你的 Acahti 实例打开头像菜单 → Access tokens，创建个人 Token；在 Benchyard 的 Secrets 中设置 ACAHTI_ROOT_URL（实例地址）和 ACAHTI_TOKEN（Token），将 Token 的目标主机限定为该实例。让新变量在当前终端/任务生效后，告诉我继续。” Supply the known instance link. Ask only for missing configuration, never for secret values in chat. Each member uses their own token; workspace packages contain no credentials. Account signup uses an admin invite at `<instance>/join`.
+4. Environment credentials are used directly. Benchyard may supply host-bound placeholders: never print, copy, persist, or pass them as literal CLI arguments. For a person outside Benchyard who explicitly wants local storage, `acahti auth login --hostname <instance> --with-token` reads the token on stdin and stores it privately. Bare `acahti auth login` prints setup guidance and exits; it does not open a browser.
+5. Verify `acahti whoami` (or native MCP `whoami`), report `login`, `root_url` and enabled `modules`, then run the requested read operation or `acahti inbox`. To verify MCP from a shell, use `acahti mcp tools` and `acahti mcp call whoami`. Successful website login or merely installing the skill is not connection success.
 
-- **Not connected / authentication required / 401:** open the installed Acahti plugin details, find its MCP server connection and open its settings (gear). Choose the sign-in / Authenticate action if shown. Have the user finish their own OAuth in the browser, then return to Codex. For a standalone CLI connection, use `codex mcp login <actual-server-name>`. Do not add a duplicate server or send the user to the website's ordinary login page as a substitute.
-- **Transport, timeout or initialization error:** report the actual startup error and endpoint. Diagnose network/server compatibility; do not repeatedly ask for login without an authentication error.
-- **Connected but tools absent:** verify this task's execution environment supports the bundled connection, refresh/reconnect as available, then start a new local task if its tool inventory is stale. Web/cloud and desktop-local connections are not interchangeable. If status is inaccessible, say it is unknown and ask for the connection's displayed status, not credentials.
-- **Success:** call MCP `whoami`, confirm the intended account and instance, note `modules`, then call `inbox` or the requested tool. A successful browser login or repository page is not an MCP acceptance test.
+Prefer native MCP when available; the CLI is the supported path in Benchyard. Named CLI commands cover common operations. `acahti mcp tools` discovers the full live catalog; `acahti mcp call TOOL '{"argument":"value"}'` invokes it, and `acahti mcp call TOOL -` accepts a JSON object on stdin for sensitive arguments. Respect the user's authorization for mutations regardless of transport.
 
-Give one concrete next action matching the observed state. Do not repeat a generic “go log in” message or claim success without a successful tool call.
+For a native HTTP MCP connection, configure the token via the client's secret/environment-backed Bearer setting. Do not embed it in a shared package or URL. If that client cannot pass an environment-backed token, use the CLI instead. Reuse existing server identifiers; do not create duplicate connections. Reload a task only when its tool inventory or environment is stale.
+
+- **401:** check the token's presence, target host and revocation; guide the user to replace it in Secrets. Do not retry OAuth or repeatedly retry an invalid token.
+- **403 / permission denied:** authentication may be valid; inspect account/repository permission. Do not request a new login without evidence.
+- **Timeout / DNS / TLS / transport error:** report the actual connection failure and endpoint; diagnose reachability separately from credentials.
+- **Wrong account or instance:** stop before mutations and resolve the intended configuration. Never send a stored token to another instance.
 
 ## Acahti git author
 
 Apply this policy only to commits intended for Acahti and pushes to Acahti. A repository merely having an Acahti remote does not make its other remotes subject to this policy.
 
 1. Resolve the actual repository and intended push destination from the user's request, explicit push remote/URL, or Git's configured push destination (including push URLs). `git commit` itself has no remote; if multiple destinations are plausible, clarify the intended destination before changing identity. Do not infer it from the directory name, remote name, or whichever remote appears first.
-2. For an Acahti destination, obtain a fresh result from the matching MCP `whoami` before each commit-producing operation and compare the destination HTTPS host with `apply_when_remote_host`. Use `git_name` for Author and `git_email` for email directly; `login` identifies the account and is not a replacement for `git_name`. Do not invent or remap names.
-3. Before creating a commit for that destination, run `setup_local` in the actual repository using local Git config only. If MCP identity cannot be verified, stop before creating the commit and diagnose the connection. Then verify `git var GIT_AUTHOR_IDENT` and `git var GIT_COMMITTER_IDENT`. This includes merge/pull operations that create merge commits, amend, rebase, cherry-pick, revert and their continuation commands. Account for `git -c`, `--author` and `GIT_AUTHOR_*` / `GIT_COMMITTER_*` overrides.
+2. For an Acahti destination, obtain a fresh result from the matching `whoami` (native MCP or CLI) before each commit-producing operation and compare the destination HTTPS host with `apply_when_remote_host`. Use `git_name` for Author and `git_email` for email directly; `login` identifies the account and is not a replacement for `git_name`. Do not invent or remap names.
+3. Before creating a commit for that destination, run `setup_local` in the actual repository using local Git config only. If the identity cannot be verified, stop before creating the commit and diagnose the connection. Then verify `git var GIT_AUTHOR_IDENT` and `git var GIT_COMMITTER_IDENT`. This includes merge/pull operations that create merge commits, amend, rebase, cherry-pick, revert and their continuation commands. Account for `git -c`, `--author` and `GIT_AUTHOR_*` / `GIT_COMMITTER_*` overrides.
 4. After creating commits, inspect their actual author and committer. For new original commits (including merge commits and reverts), both must match the verified identity. For amend/rebase/cherry-pick, preserve the expected original author and verify the new committer instead. Before pushing to Acahti, inspect the outgoing commits and verify the author and committer of commits created in this task. A push does not change existing commit metadata. If verified identity is unavailable or a newly created commit has an unexpected identity, stop and resolve it before pushing. Do not relabel imported commits as the current user.
 5. Preserve existing authorship when amending, rebasing or cherry-picking another contributor's commit; use the current verified identity for the new committer. Reset an existing author only when the user intends that correction. Never rewrite published history automatically.
 
-For GitHub, Codeup or any other non-Acahti target, do not require Acahti OAuth, change identity, block commits, or run island CI. When temporarily applying `setup_local` in a mixed-remote workflow, save and restore the exact prior local identity entries after the Acahti operation so a later non-Acahti commit does not inherit them. Never change global config or delete unrelated identity settings.
+For GitHub, Codeup or any other non-Acahti target, do not require Acahti authentication, change identity, block commits, or run island CI. When temporarily applying `setup_local` in a mixed-remote workflow, save and restore the exact prior local identity entries after the Acahti operation so a later non-Acahti commit does not inherit them. Never change global config or delete unrelated identity settings.
 
 Hooks only remind the agent to apply this policy; they do not authenticate, change Git config or enforce a Git-level block.
 
@@ -128,9 +132,9 @@ Follow `whoami.skill_url` for full detail. This rule covers remotes only.
 ✅ git remote add acahti <whoami.clone_url_template>
 ✅ git push acahti HEAD:dev
 ❌ Replace origin with Acahti when another host is the product remote
-❌ Paste Bearer tokens or read secrets/ for git auth — use MCP OAuth + credential helper
+❌ Paste Bearer tokens or read secrets/ for git auth — use a host-scoped credential helper with the personal token
 ```
 
-On 401, tell the user to finish MCP OAuth for this connection. Do not ask them to paste a token.
+On 401, follow the token troubleshooting above. Never ask for a token in chat.
 
 Island policy in this skill must stay aligned with `cursor/rules/*.mdc` in the same repository.
