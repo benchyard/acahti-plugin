@@ -1,6 +1,6 @@
 {
   "name": "acahti-saidc",
-  "version": "1.10.1+saidc.gitacaf61fc737c",
+  "version": "1.11.0+saidc.gitaf590f6b877f",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "李沛阳"

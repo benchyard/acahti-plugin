@@ -1,16 +1,16 @@
 {
-  "sourceCommit": "acaf61fc737c678cebb498a0c93a97106c0f16e0",
-  "pluginVersion": "1.10.1+saidc.gitacaf61fc737c",
+  "sourceCommit": "af590f6b877f94b5a135b8fa37667c8b5291e2c5",
+  "pluginVersion": "1.11.0+saidc.gitaf590f6b877f",
   "pluginId": "Plugin_1e4e77f91270819182876aef6d4766bb",
   "filesSHA256": {
-    "README.md": "c63da773eec600f055b0fb1d24366dd02065c421a1db462fc7947d667f150fd5",
+    "README.md": "8474bf4464864ea7cb03b625cd40b2125954638afcedf3a00029eb32394528b2",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "67c6c0a8bf1e7cb1d2c309037e43bbe21180c86e27144e825b8ee654f94fc9de",
     "mcp.json": "8a6055b6023a502f80e8f9dbdf9692badb8446d973289b43e226fe5e996593b5",
-    "plugin.json": "f3ae618e74765d9f64a9d482225ea547fe591d0f6994e4b433635e7701c96ddc",
-    "release.json": "27f90585aaf22849e5ffd6b2773ff8be91e449f7ea8a8f07a5cca9bbc9a46a13",
-    "skills/acahti/SKILL.md": "d21ab2253568bd65376b228f78ef86cce2c1c8252477dcd035227dd0f1a91c34",
-    "skills/setup/SKILL.md": "0b261dd148fba5b521ec79b144afd5d30c6a99d073e869699acb6b00921479e2"
+    "plugin.json": "3dd35b01be26afcb0c4e449d0233debd46facc1f7fd23f4b53008aeb6d63858b",
+    "release.json": "198a42ccce346ed761195f66719d3673bcd31caf67b5ae5a3b9da99a373b425d",
+    "skills/acahti/SKILL.md": "461b3f4d81a9a1aaa9c2a34278437471475ab23c488e7c7bb249260f39c49166",
+    "skills/setup/SKILL.md": "d081a4f106e513e4880c7ddc86b4bde24540d42b471cdc676712711c99fce340"
   }
 }
