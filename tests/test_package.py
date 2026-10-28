@@ -104,8 +104,8 @@ class ReleaseTests(unittest.TestCase):
     def test_versions_and_modules_guidance(self):
         cursor = json.loads((ROOT / "cursor/.cursor-plugin/plugin.json").read_text())
         codex = json.loads((ROOT / "codex/plugin.json").read_text())
-        self.assertEqual(cursor["version"], "1.10.1")
-        self.assertEqual(codex["version"], "1.10.1")
+        self.assertEqual(cursor["version"], "1.11.0")
+        self.assertEqual(codex["version"], "1.11.0")
         self.assertEqual(cursor["version"], codex["version"])
         self.assertEqual(cursor["author"]["name"], "李沛阳")
         self.assertEqual(codex["author"]["name"], "李沛阳")

@@ -1,6 +1,6 @@
 {
   "name": "acahti",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "description": "Acahti git, PRs, pipelines, CI, and optional Work/Argos/Chat for your chosen instance.",
   "author": {
     "name": "李沛阳"

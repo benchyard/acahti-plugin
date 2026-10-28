@@ -13,6 +13,8 @@ Read `whoami.modules` (`work` / `argos` / `chat`). Same shape on `GET /ui/public
 | `argos` | `$ROOT_URL/argos` | Run browser; ingest on this island; deep link `/argos/runs/{sid}` |
 | `chat` | header launcher + right dock; mobile `/chat` | Org IM |
 
+For Work on Acahti 0.6.0+, use MCP ticket/Todo/document tools or the CLI with the configured PAT. Ticket details include comments and attachment metadata; no browser Cookie or localhost callback is needed. A successful whoami with missing Work tools indicates a server capability gap, not failed authentication.
+
 When a flag is true, browser or session cookie use of that SPA and matching `/ui/work/*`, `/ui/argos/*`, `/ui/chat/*` is allowed. Git / PR / CI / secrets stay MCP-first — do not use the browser to replace those tools.
 
 - Argos CLI: `ARGOS_DASH_URL=$ROOT_URL`. Prefer Argos → CLI (`dash.env`).

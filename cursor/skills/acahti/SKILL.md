@@ -30,6 +30,14 @@ Read `whoami.modules` (`work` / `argos` / `chat`). Same flags on `GET /ui/public
 
 Follow the live skill **Optional modules** section when `skill_url` is available.
 
+## Work from Benchyard or native MCP
+
+When `whoami.modules.work` is true, discover `ticket_get`, `ticket_list`, Todo and document tools. Acahti 0.6.0+ serves Work through MCP and `/acahti/v1/work/*` with the same PAT or OAuth identity as Git/CI. Work is instance-wide shared collaboration; personal list views are filters.
+
+In Benchyard, use the configured Token directly with `acahti ticket view ID` (CLI 0.7.0+) or `acahti mcp call ticket_get '{"id":267}'` (CLI 0.6.0+). Page URLs on the selected instance are accepted by `ticket view`. Ticket detail includes comments and attachment metadata. Download files with `acahti attachment download ID --output PATH`.
+
+A successful `whoami` with missing Work tools means the server lacks the capability. Do not ask for another Token or website Cookie to compensate. Native MCP OAuth remains supported; Benchyard PAT access needs no localhost callback. Obtain current operation details from the live product skill and tool schemas before mutations.
+
 ## Instance configuration
 
 Reuse the intended instance's existing connection. Otherwise take `ACAHTI_ROOT_URL` or the CLI's stored instance; ask for the URL only when neither is available. Never guess the instance from the publisher. If multiple instances are plausible, clarify before sending credentials. Keep Git remotes unchanged.

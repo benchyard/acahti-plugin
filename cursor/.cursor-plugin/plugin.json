@@ -1,7 +1,7 @@
 {
   "name": "acahti",
   "displayName": "Acahti",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "description": "Island git, PRs, pipelines, secrets, commit checks, and optional Work/Argos/Chat modules.",
   "author": {
     "name": "李沛阳"
