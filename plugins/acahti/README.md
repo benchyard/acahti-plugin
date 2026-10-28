@@ -1,14 +1,14 @@
 # Acahti — SAIDC workspace
 
-Version: `1.9.0+saidc.gitecd4b8931661`
+Version: `1.10.0+saidc.git51193212a965`
 
 MCP endpoint: `https://acahti.s-aidc.com/mcp`
 
 ## 首次使用
 
 1. 安装插件后发送：连接 Acahti 并检查我的身份和待办。Skill 首次调用会检查连接与配置。
-2. 在实例头像菜单 → Access tokens 创建个人 Token，在 Benchyard Secrets 设置 ACAHTI_ROOT_URL 和 ACAHTI_TOKEN；Token 目标主机限定为该实例。
-3. 让环境变量在当前任务生效。Agent 使用原生 MCP 或 acahti CLI，无需 OAuth 或 localhost 回调。
+2. Codex/ChatGPT 点击连接并完成 OAuth 授权。Benchyard 终端任务使用个人 Access Token，在 Secrets 设置 ACAHTI_ROOT_URL 和 ACAHTI_TOKEN，限定目标主机。
+3. 运行插件 setup 并验证 whoami。若授权成功但工具不可用，核对服务端版本、插件同步和实际工具加载；不要反复授权。Benchyard 新变量需在当前任务生效。
 4. 成功调用 whoami 和 inbox 后才算连接成功；MCP 可通过 acahti mcp tools 验证。不要把 Token 发到聊天中。
 
 ## Author 提醒

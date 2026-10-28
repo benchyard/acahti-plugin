@@ -1,22 +1,24 @@
 {
-  "version": "1.9.0+saidc.gitecd4b8931661",
+  "version": "1.10.0+saidc.git51193212a965",
   "workspace": "SAIDC",
   "mcpEndpoint": "https://acahti.s-aidc.com/mcp",
   "sourceFilesSHA256": {
-    ".codex-plugin/plugin.json": "a203390d06df22aac1c60a20c8fd9b8f6ba99f9a1c155c661ddd0a800cedaf84",
-    "README.md": "cd332bccadd41bcb89d4583bcc260450fb6dc32e9606f2d05e6f3ef6ff77dd9f",
+    "README.md": "009ef7ea7c607bdeae3de504e906378bd498b9c0d98f95e1835c8f773ae64ce6",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "67c6c0a8bf1e7cb1d2c309037e43bbe21180c86e27144e825b8ee654f94fc9de",
-    "skills/acahti/SKILL.md": "a484fd7441c97ecd7d4e4ac21225ee1af6d245aa9b46aba82b402954821f3b2a"
+    "plugin.json": "c2d4e80a3c6694d0cb8a55e988019f6185f4fb83408a5c0bc3c79ad92c7267f7",
+    "skills/acahti/SKILL.md": "f82d0f5db66cb8c5ba7f947e08d8031f6b7175c127c499cf6a2ea42660ed7927",
+    "skills/setup/SKILL.md": "0b261dd148fba5b521ec79b144afd5d30c6a99d073e869699acb6b00921479e2"
   },
   "packageFilesSHA256": {
-    ".codex-plugin/plugin.json": "0c6350d005831b251af3b51c5403848718ace558561431f1b3bd96f3331a4319",
-    ".mcp.json": "d89c2702081cc512c27c8beeaee33bc5823f02b117fecba77efbe2ae90dd1f4a",
-    "README.md": "a85257c114a186e4e6e7ac04c72aa3afbdd40a1851d676b63ef797546c15ecb3",
+    "README.md": "3b89f969514e04374fad3600fe911c5fb75046ea2dbafde5fa684ae94b15d305",
     "assets/logo.svg": "7895d0fcd71929b2d9adf3d9861354eae0916a5186e9b8c8fc231399ebc8a77d",
     "hooks/hooks.json": "07d8ce2fce41c772952206b5ac3400b88530880f495c86342d6690ce358887e2",
     "hooks/remind.py": "67c6c0a8bf1e7cb1d2c309037e43bbe21180c86e27144e825b8ee654f94fc9de",
-    "skills/acahti/SKILL.md": "6db152b67a887b6324fe5538836a0bda97a70f9a80ca6d1fd348f7a4a3a46217"
+    "mcp.json": "8a6055b6023a502f80e8f9dbdf9692badb8446d973289b43e226fe5e996593b5",
+    "plugin.json": "00c7d57e67d2abd609b830194be008cb87f87d5e8ad6a3e72c479b67d47d1d39",
+    "skills/acahti/SKILL.md": "d21ab2253568bd65376b228f78ef86cce2c1c8252477dcd035227dd0f1a91c34",
+    "skills/setup/SKILL.md": "0b261dd148fba5b521ec79b144afd5d30c6a99d073e869699acb6b00921479e2"
   }
 }
