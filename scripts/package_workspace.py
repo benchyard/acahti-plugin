@@ -32,7 +32,7 @@ def build(source, instance, workspace, revision="1", plugin_name="acahti"):
     if not re.fullmatch(r"[A-Za-z0-9-]+", revision):
         raise ValueError("revision must contain only letters, numbers or hyphens")
     url = endpoint(instance)
-    names = [".codex-plugin/plugin.json", "README.md", "hooks/hooks.json", "hooks/remind.py"]
+    names = ["plugin.json", "README.md", "hooks/hooks.json", "hooks/remind.py"]
     for folder in ("skills", "assets"):
         names += [p.relative_to(source).as_posix() for p in (source / folder).rglob("*")
                   if p.is_file() and not any(part.startswith(".") or part == "__pycache__" for part in p.relative_to(source).parts)
@@ -44,29 +44,28 @@ def build(source, instance, workspace, revision="1", plugin_name="acahti"):
             raise ValueError(f"source escapes package: {name}")
         files[name] = p.read_bytes()
     source_hashes = {n: hashlib.sha256(b).hexdigest() for n, b in files.items()}
-    manifest = json.loads(files[".codex-plugin/plugin.json"])
+    manifest = json.loads(files["plugin.json"])
     version = manifest["version"].split("+", 1)[0] + "+" + workspace.lower() + "." + revision
     manifest["version"] = version
     manifest["name"] = plugin_name
     if plugin_name != "acahti":
-        manifest["interface"]["displayName"] = f"Acahti {workspace}"
-    manifest["mcpServers"] = "./.mcp.json"
-    manifest["interface"]["longDescription"] = (
+        manifest["extensions"]["com.openai"]["interface"]["displayName"] = f"Acahti {workspace}"
+    manifest["extensions"]["com.openai"]["interface"]["longDescription"] = (
         f"{workspace} workspace edition. MCP endpoint is preconfigured; each member supplies "
-        "a personal ACAHTI_TOKEN through the environment. Benchyard onboarding uses Secrets and CLI. "
+        "OAuth authorization through the client connection setup. Run the bundled setup skill after installation. Benchyard shell tasks use Secrets and CLI. "
         "Use MCP first for identity, repositories and CI. Read whoami.modules for optional Work/Argos/Chat. "
         "Optional trusted hooks provide author reminders."
     )
-    files[".codex-plugin/plugin.json"] = encode(manifest)
-    files[".mcp.json"] = encode({"mcpServers": {"acahti": {"type": "http", "url": url, "bearer_token_env_var": "ACAHTI_TOKEN"}}})
+    files["plugin.json"] = encode(manifest)
+    files["mcp.json"] = encode({"$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json", "mcpServers": {"acahti": {"type": "streamable-http", "url": url, "extensions": {"com.openai": {"auth": {"type": "oauth", "client": {"mode": "dcr"}}}}}}})
     skill = files["skills/acahti/SKILL.md"].decode()
     start = skill.index("## Instance configuration\n")
     end = skill.index("## First use and connection troubleshooting\n", start)
     skill = skill[:start] + f'''## Instance configuration
 
-This {workspace} workspace release bundles the intended MCP endpoint in `.mcp.json`. Reuse that plugin connection. Do not ask members to enter an instance URL or create a duplicate standalone server. Discover its actual runtime identifier; it need not be exactly `acahti`.
+This {workspace} workspace release bundles the intended MCP endpoint in `mcp.json`. Reuse that plugin connection. Do not ask members to enter an instance URL or create a duplicate standalone server. Discover its actual runtime identifier; it need not be exactly `acahti`.
 
-The intended instance is `{url.removesuffix('/mcp')}`. Use it for first-use guidance and `ACAHTI_ROOT_URL`. Each member sets their personal `ACAHTI_TOKEN` in Benchyard Secrets or the client environment. The bundled HTTP connection reads that variable; no credentials are shipped. If native MCP is unavailable, continue with the CLI against this instance after verifying `whoami`.
+The intended instance is `{url.removesuffix('/mcp')}`. Use it for first-use guidance and `ACAHTI_ROOT_URL`. Each member authorizes the bundled OAuth connection in the client. The package declares OAuth with dynamic client registration; no credentials are shipped. Benchyard shell tasks instead use `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN` in Secrets. Those Secrets do not configure a desktop client. If native MCP is unavailable, continue with the CLI against this instance after verifying `whoami`.
 
 The administrator updates the endpoint through the workspace packaging command. Never guess a different host or transfer credentials when changing an instance.
 
@@ -74,8 +73,8 @@ The administrator updates the endpoint through the workspace packaging command. 
     files["skills/acahti/SKILL.md"] = skill.encode()
     files["README.md"] = (f"# Acahti — {workspace} workspace\n\nVersion: `{version}`\n\nMCP endpoint: `{url}`\n\n"
         "## 首次使用\n\n1. 安装插件后发送：连接 Acahti 并检查我的身份和待办。Skill 首次调用会检查连接与配置。\n"
-        "2. 在实例头像菜单 → Access tokens 创建个人 Token，在 Benchyard Secrets 设置 ACAHTI_ROOT_URL 和 ACAHTI_TOKEN；Token 目标主机限定为该实例。\n"
-        "3. 让环境变量在当前任务生效。Agent 使用原生 MCP 或 acahti CLI，无需 OAuth 或 localhost 回调。\n"
+        "2. Codex/ChatGPT 点击连接并完成 OAuth 授权。Benchyard 终端任务使用个人 Access Token，在 Secrets 设置 ACAHTI_ROOT_URL 和 ACAHTI_TOKEN，限定目标主机。\n"
+        "3. 运行插件 setup 并验证 whoami。若授权成功但工具不可用，核对服务端版本、插件同步和实际工具加载；不要反复授权。Benchyard 新变量需在当前任务生效。\n"
         "4. 成功调用 whoami 和 inbox 后才算连接成功；MCP 可通过 acahti mcp tools 验证。不要把 Token 发到聊天中。\n\n"
         "## Author 提醒\n\n可在 /hooks 审查并信任提醒 hook，需要 Python 3。它只注入规则，不读取凭据、不改 Git、不强制拦截提交。"
         "Skill 要求 Acahti 提交前核验当前 MCP 身份、按 remote host 限定范围、设置并检查有效 author。\n\n"

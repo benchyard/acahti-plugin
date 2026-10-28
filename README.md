@@ -28,7 +28,7 @@ flowchart LR
 | Host | Package | Connection |
 |---|---|---|
 | Cursor | `cursor/` via the repository marketplace | Set `ACAHTI_ROOT_URL` and provide `ACAHTI_TOKEN` in the environment |
-| Codex | `codex/` via the repository marketplace | Follow first-use Benchyard guidance; native MCP or CLI with a personal token |
+| Codex | `codex/` via the repository marketplace | Run setup; desktop OAuth connection or Benchyard Secrets and CLI |
 
 Follow the linked package instructions for your host. Reuse an existing connection;
 do not register the same server twice. Workspace distributions can bundle a chosen

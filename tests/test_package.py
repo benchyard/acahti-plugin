@@ -28,9 +28,10 @@ class ReleaseTests(unittest.TestCase):
         skill = yaml.safe_load(frontmatter)
         self.assertEqual(skill["name"], "acahti")
         self.assertIsInstance(skill["description"], str)
-        manifest = json.loads(files[".codex-plugin/plugin.json"])
+        manifest = json.loads(files["plugin.json"])
         self.assertEqual(manifest["name"], "acahti")
-        self.assertIn(manifest["mcpServers"].removeprefix("./"), files)
+        self.assertIn("mcp.json", files)
+        self.assertIn(manifest["extensions"]["com.openai"]["onboardingSkill"].removeprefix("./"), files)
         hooks = json.loads(files["hooks/hooks.json"])["hooks"]
         self.assertEqual(set(hooks), {"SessionStart", "UserPromptSubmit"})
         for event in hooks.values():
@@ -46,8 +47,8 @@ class ReleaseTests(unittest.TestCase):
 
     def test_workspace_package_and_reproducibility(self):
         files, version = pkg.build(ROOT / "codex", "https://example.com/prefix", "Example")
-        self.assertEqual(version, json.loads((ROOT / "codex/.codex-plugin/plugin.json").read_text())["version"].split("+", 1)[0] + "+example.1")
-        self.assertEqual(json.loads(files[".mcp.json"])["mcpServers"]["acahti"]["url"], "https://example.com/prefix/mcp")
+        self.assertEqual(version, json.loads((ROOT / "codex/plugin.json").read_text())["version"].split("+", 1)[0] + "+example.1")
+        self.assertEqual(json.loads(files["mcp.json"])["mcpServers"]["acahti"]["url"], "https://example.com/prefix/mcp")
         self.assertNotIn("This plugin does not bundle", files["skills/acahti/SKILL.md"].decode())
         self.assertNotIn("The generic package has no fixed", files["skills/acahti/SKILL.md"].decode())
         self.assertIn("## Git tags vs image tags", files["skills/acahti/SKILL.md"].decode())
@@ -78,9 +79,9 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(entry["pluginId"], config["pluginId"])
             self.assertEqual(entry["name"], "acahti-example")
             plugin = output / entry["source"]["path"]
-            manifest = json.loads((plugin / ".codex-plugin/plugin.json").read_text())
+            manifest = json.loads((plugin / "plugin.json").read_text())
             self.assertEqual(manifest["name"], entry["name"])
-            self.assertEqual(manifest["version"], json.loads((ROOT / "codex/.codex-plugin/plugin.json").read_text())["version"].split("+", 1)[0] + "+example.git" + "a" * 12)
+            self.assertEqual(manifest["version"], json.loads((ROOT / "codex/plugin.json").read_text())["version"].split("+", 1)[0] + "+example.git" + "a" * 12)
             metadata = json.loads((output / "build.json").read_text())
             for name, expected in metadata["filesSHA256"].items():
                 self.assertEqual(hashlib.sha256((plugin / name).read_bytes()).hexdigest(), expected)
@@ -102,13 +103,13 @@ class ReleaseTests(unittest.TestCase):
 
     def test_versions_and_modules_guidance(self):
         cursor = json.loads((ROOT / "cursor/.cursor-plugin/plugin.json").read_text())
-        codex = json.loads((ROOT / "codex/.codex-plugin/plugin.json").read_text())
-        self.assertEqual(cursor["version"], "1.9.0")
-        self.assertEqual(codex["version"], "1.9.0")
+        codex = json.loads((ROOT / "codex/plugin.json").read_text())
+        self.assertEqual(cursor["version"], "1.10.0")
+        self.assertEqual(codex["version"], "1.10.0")
         self.assertEqual(cursor["version"], codex["version"])
         self.assertEqual(cursor["author"]["name"], "Benchyard")
         self.assertEqual(codex["author"]["name"], "Benchyard")
-        self.assertEqual(codex["interface"]["developerName"], "Benchyard")
+        self.assertEqual(codex["extensions"]["com.openai"]["interface"]["developerName"], "Benchyard")
         marketplace = json.loads((ROOT / ".cursor-plugin/marketplace.json").read_text())
         self.assertEqual(marketplace["owner"]["name"], "Benchyard")
         skill = (ROOT / "codex/skills/acahti/SKILL.md").read_text()

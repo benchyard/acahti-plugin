@@ -1,7 +1,7 @@
 ---
 name: acahti
 description: >-
-  Connect Acahti in Benchyard with personal tokens; use MCP or CLI for repositories, PRs and CI.
+  Connect Acahti with OAuth in Codex or personal tokens in Benchyard; use MCP or CLI for repositories, PRs and CI.
   Optional Work/Argos/Chat when whoami.modules flags are on.
   For commits and pushes targeting Acahti, use whoami and setup_local; leave other targets alone.
   Also use for Acahti connection setup and missing MCP tools.
@@ -13,7 +13,7 @@ description: >-
 
 Use native MCP or the `acahti` CLI for the intended instance. Verify `whoami` and read `whoami.modules` before work. On first use, follow the onboarding below even when only the skill was installed.
 
-After connecting, fetch `whoami.skill_url` on `acahti.benchyard.com` for current product workflows. Instance values come from `whoami`. If the live skill is unavailable, report that and use these packaged instructions for supported operations; stop only for operations whose contract cannot be established. Use the user's requested token authentication even if a published skill still describes OAuth.
+After connecting, fetch `whoami.skill_url` on `acahti.benchyard.com` for current product workflows. Instance values come from `whoami`. If the live skill is unavailable, report that and use these packaged instructions for supported operations; stop only for operations whose contract cannot be established. Keep the selected transport: Codex/ChatGPT native plugins use OAuth; Benchyard shells use personal Access Tokens.
 
 ## Optional modules
 
@@ -34,21 +34,21 @@ Follow the live skill **Optional modules** section when `skill_url` is available
 
 Reuse the intended instance's existing connection. Otherwise take `ACAHTI_ROOT_URL` or the CLI's stored instance; ask for the URL only when neither is available. Never guess the instance from the publisher. If multiple instances are plausible, clarify before sending credentials. Keep Git remotes unchanged.
 
-Use a personal Access Token from the instance's avatar menu → Access tokens. MCP uses `Authorization: Bearer` with that token. No OAuth login or localhost callback is needed. A skill cannot run an installation hook: begin onboarding on its first invocation, or when the user asks to connect.
+Codex/ChatGPT native plugins use OAuth. Benchyard shells use a personal Access Token from the instance's avatar menu → Access tokens; they need no OAuth login or localhost callback. MCP accepts either credential through `Authorization: Bearer`. The plugin declares a setup skill that users can run after installation. Also begin onboarding on first invocation or when the user asks to connect.
 
 ## First use and connection troubleshooting
 
-1. Discover available MCP tools. If the intended connection works, call `whoami` and continue. In Benchyard or a shell without native MCP tools, use the `acahti` CLI. Check `command -v acahti` and the presence (never values) of `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN`; also try `acahti auth status` for a stored login. Do not read credentials files or extract tokens from Git.
+1. For desktop plugin setup or repeated Authenticate prompts, read `../setup/SKILL.md`. Discover available MCP tools. If the intended connection works, call `whoami` and continue. In Benchyard or a shell without native MCP tools, use the `acahti` CLI. Check `command -v acahti` and the presence (never values) of `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN`; also try `acahti auth status` for a stored login. Do not read credentials files or extract tokens from Git.
 2. If the CLI is missing, install `npm install -g @benchyard/acahti` using the environment's installation procedure. An installed skill does not install the CLI automatically.
-3. If configuration is missing, give this concrete guidance in the user's language: “在你的 Acahti 实例打开头像菜单 → Access tokens，创建个人 Token；在 Benchyard 的 Secrets 中设置 ACAHTI_ROOT_URL（实例地址）和 ACAHTI_TOKEN（Token），将 Token 的目标主机限定为该实例。让新变量在当前终端/任务生效后，告诉我继续。” Supply the known instance link. Ask only for missing configuration, never for secret values in chat. Each member uses their own token; workspace packages contain no credentials. Account signup uses an admin invite at `<instance>/join`.
+3. For a desktop plugin, complete OAuth through the client's connection setup. For Benchyard shell tasks, if configuration is missing, give this concrete guidance in the user's language: “在你的 Acahti 实例打开头像菜单 → Access tokens，创建个人 Token；在 Benchyard 的 Secrets 中设置 ACAHTI_ROOT_URL（实例地址）和 ACAHTI_TOKEN（Token），将 Token 的目标主机限定为该实例。让新变量在当前终端/任务生效后，告诉我继续。” Supply the known instance link. Ask only for missing configuration, never for secret values in chat. Each member uses their own token; workspace packages contain no credentials. Account signup uses an admin invite at `<instance>/join`.
 4. Environment credentials are used directly. Benchyard may supply host-bound placeholders: never print, copy, persist, or pass them as literal CLI arguments. For a person outside Benchyard who explicitly wants local storage, `acahti auth login --hostname <instance> --with-token` reads the token on stdin and stores it privately. Bare `acahti auth login` prints setup guidance and exits; it does not open a browser.
 5. Verify `acahti whoami` (or native MCP `whoami`), report `login`, `root_url` and enabled `modules`, then run the requested read operation or `acahti inbox`. To verify MCP from a shell, use `acahti mcp tools` and `acahti mcp call whoami`. Successful website login or merely installing the skill is not connection success.
 
 Prefer native MCP when available; the CLI is the supported path in Benchyard. Named CLI commands cover common operations. `acahti mcp tools` discovers the full live catalog; `acahti mcp call TOOL '{"argument":"value"}'` invokes it, and `acahti mcp call TOOL -` accepts a JSON object on stdin for sensitive arguments. Respect the user's authorization for mutations regardless of transport.
 
-For a native HTTP MCP connection, configure the token via the client's secret/environment-backed Bearer setting. Do not embed it in a shared package or URL. If that client cannot pass an environment-backed token, use the CLI instead. Reuse existing server identifiers; do not create duplicate connections. Reload a task only when its tool inventory or environment is stale.
+For the bundled native HTTP MCP connection, use the client's OAuth flow. A standalone shell client can use an environment-backed Bearer setting. Do not embed it in a shared package or URL. If native MCP is unavailable in a shell task, use the CLI with a personal token. Benchyard Secrets do not populate a desktop client's credentials. Reuse existing server identifiers; do not create duplicate connections. Reload a task only when its tool inventory or environment is stale.
 
-- **401:** check the token's presence, target host and revocation; guide the user to replace it in Secrets. Do not retry OAuth or repeatedly retry an invalid token.
+- **401:** check the token's presence, target host and revocation; guide the user to replace it in Secrets. For OAuth, let the client refresh its token; reconnect once if refresh fails. Do not repeatedly retry an invalid token or send a Benchyard user through browser OAuth.
 - **403 / permission denied:** authentication may be valid; inspect account/repository permission. Do not request a new login without evidence.
 - **Timeout / DNS / TLS / transport error:** report the actual connection failure and endpoint; diagnose reachability separately from credentials.
 - **Wrong account or instance:** stop before mutations and resolve the intended configuration. Never send a stored token to another instance.

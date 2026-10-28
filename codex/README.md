@@ -4,12 +4,18 @@ Use MCP or CLI for identity, repositories, PRs and CI. Read `whoami.modules` for
 
 ## First connection
 
-1. Install the plugin and ask: **连接 Acahti，检查配置并验证身份和待办**. The first invocation starts guided setup; installation itself cannot execute a skill.
-2. Create a personal token in your instance's avatar menu → Access tokens. Set `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN` in Benchyard Secrets, limiting the token's destination to that instance. Never send the token in chat.
-3. The agent checks existing MCP or CLI access, installs `@benchyard/acahti` if needed, and verifies `whoami` and `inbox`. Environment changes may require a new task. Benchyard placeholders remain in the environment and are never copied to files.
-4. Workspace packages preconfigure the endpoint and `bearer_token_env_var: ACAHTI_TOKEN`. Generic native Codex: `codex mcp add <name> --url <endpoint> --bearer-token-env-var ACAHTI_TOKEN`. Reuse existing connections. For shell tasks, `acahti mcp tools` and `acahti mcp call` expose the full catalog without native MCP tools.
+1. Install the plugin and run **setup**, or ask: **连接 Acahti，检查配置并验证身份和待办**.
+2. In Codex/ChatGPT, connect the bundled server and complete OAuth for the intended account. The workspace package explicitly declares OAuth/DCR. No personal-token environment variable is required for this native connection.
+3. In Benchyard shell tasks, create a personal token in the instance's avatar menu → Access tokens. Set `ACAHTI_ROOT_URL` and `ACAHTI_TOKEN` in Secrets, limiting the token's destination to that instance. The CLI uses these directly without browser OAuth or localhost callbacks. Never send credentials in chat or copy host-bound placeholders into files.
+4. Verify native MCP `whoami` and `inbox` in a fresh task. For CLI-only environments, verify `acahti whoami`, `acahti mcp tools` and `acahti inbox`. Report the transport actually verified.
 
-401 means check token/host/revocation; permission errors require access review; network errors require connection diagnosis. No OAuth or localhost callback is used.
+## Repeated authentication after upgrading
+
+Acahti **0.5.29+** accepts both OAuth access tokens and personal tokens at `/mcp`. Version 0.5.27–0.5.28 rejected OAuth tokens even after a successful login. Upgrade the service, then let the client refresh or reconnect once.
+
+The administrator syncs the `workspace-saidc` marketplace and checks the import report. Verify installed plugin **1.10.0 or newer**, then run setup. This removes version 1.9's mandatory environment-token configuration and declares OAuth explicitly. Do not delete a shared plugin to upgrade it. A GitHub release is not proof that a desktop installed the new package.
+
+For 401, check credential expiry, revocation and instance; for 403, review permissions. Diagnose transport failures separately. See the [official plugin OAuth configuration](https://developers.openai.com/plugins/build/plugins#configure-mcp-authentication).
 
 ## Git author
 
